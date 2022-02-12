@@ -1,0 +1,57 @@
+[
+	{
+		"inputs": [
+			{
+				"internalType": "string",
+				"name": "n",
+				"type": "string"
+			},
+			{
+				"internalType": "string",
+				"name": "p",
+				"type": "string"
+			}
+		],
+		"name": "makePromise",
+		"outputs": [],
+		"stateMutability": "nonpayable",
+		"type": "function"
+	},
+	{
+		"inputs": [],
+		"name": "showPMakers",
+		"outputs": [
+			{
+				"internalType": "address[]",
+				"name": "",
+				"type": "address[]"
+			}
+		],
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"inputs": [
+			{
+				"internalType": "address",
+				"name": "u",
+				"type": "address"
+			}
+		],
+		"name": "showPromises",
+		"outputs": [
+			{
+				"internalType": "string",
+				"name": "",
+				"type": "string"
+			},
+			{
+				"internalType": "string[]",
+				"name": "",
+				"type": "string[]"
+			}
+		],
+		"stateMutability": "view",
+		"type": "function"
+	}
+]
