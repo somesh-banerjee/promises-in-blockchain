@@ -23,12 +23,13 @@ class aForm extends Component {
 
       const accounts = await window.ethereum.request({ method: 'eth_requestAccounts' });
       const account = accounts[0];
+      const chainID = '0x539';
 
-      if(window.ethereum.chainId !== '0x4'){
+      if(window.ethereum.chainId !== chainID){
         try {
           await window.ethereum.request({
             method: 'wallet_switchEthereumChain',
-            params: [{ chainId: '0x4' }],
+            params: [{ chainId: chainID }],
           });
         } catch (switchError) {
           // This error code indicates that the chain has not been added to MetaMask.
@@ -53,7 +54,7 @@ class aForm extends Component {
           
         }
       }
-
+      console.log(Contract);
       try {
         const transactionDetails = await Contract.methods
           .makePromise(
