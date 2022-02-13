@@ -14,7 +14,54 @@ class aForm extends Component {
 
     this.setState({ loading: true })
 
-    
+    if (typeof window.ethereum === 'undefined') {
+      console.log('MetaMask is not installed!');
+      this.setState({ errorMessage: "Looks like Metamask Wallet is not installed, please install it."});
+    }
+    else{
+
+      const accounts = await window.ethereum.request({ method: 'eth_requestAccounts' });
+      const account = accounts[0];
+
+      if(window.ethereum.chainId !== '0x4'){
+        try {
+          await window.ethereum.request({
+            method: 'wallet_switchEthereumChain',
+            params: [{ chainId: '0x4' }],
+          });
+        } catch (switchError) {
+          // This error code indicates that the chain has not been added to MetaMask.
+          if (switchError.code === 4902) {
+            try {
+              await window.ethereum.request({
+                method: 'wallet_addEthereumChain',
+                params: [
+                  {
+                    chainId: '0x4',
+                    chainName: 'Rinkeby Testnet',
+                    rpcUrls: ['https://rinkeby.infura.io/v3/'],
+                  },
+                ],
+              });
+            } catch (addError) {
+              this.setState({ errorMessage: "Some unknown error. Report the issue"});
+            }
+          }else{
+            this.setState({ errorMessage: "Some unknown error. Report the issue"});
+          }
+          
+        }
+      }else{
+
+        try {
+          
+        } catch (e) {
+          this.setState({ errorMessage: e.message});
+        }
+
+      }
+
+    }
 
     this.setState({ loading: false })
   }
@@ -23,7 +70,7 @@ class aForm extends Component {
     return (
       <div>
         <Segment inverted>
-        <Form size="big" inverted onSubmit={this.onSubmit} error={!!this.state.errorMessage}>
+        <Form size="big" inverted onSubmit={this.onSubmit} error={!!this.state.errorMessage} warn={!!this.state.warnMessage}>
           <h2>Make your Promise</h2>
           <Form.Group>
               <Form.Input
