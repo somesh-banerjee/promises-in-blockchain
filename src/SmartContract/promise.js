@@ -3,7 +3,7 @@ import abi from './build/promise.json';
 
 const instance = new web3.eth.Contract(
 	abi,
-	process.env.SMART_CONTRACT_ADD
+	'0xD53620501503B430020d883200D954EBd3b2A83C'
 );
 
 export default instance;

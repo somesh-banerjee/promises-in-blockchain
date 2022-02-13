@@ -1,5 +1,6 @@
 import React,{ Component } from 'react';
 import { Button,Form,Message,Segment } from 'semantic-ui-react';
+import Contract from '../SmartContract/promise';
 
 class aForm extends Component {
   state = {
@@ -51,14 +52,19 @@ class aForm extends Component {
           }
           
         }
-      }else{
+      }
 
-        try {
-          
-        } catch (e) {
-          this.setState({ errorMessage: e.message});
-        }
-
+      try {
+        const transactionDetails = await Contract.methods
+          .makePromise(
+            this.state.name,
+            this.state.promiseStmnt
+          )
+          .send({
+            from: account,
+          });
+      } catch (e) {
+        this.setState({ errorMessage: e.message});
       }
 
     }
@@ -70,7 +76,7 @@ class aForm extends Component {
     return (
       <div>
         <Segment inverted>
-        <Form size="big" inverted onSubmit={this.onSubmit} error={!!this.state.errorMessage} warn={!!this.state.warnMessage}>
+        <Form size="big" inverted onSubmit={this.onSubmit} error={!!this.state.errorMessage}>
           <h2>Make your Promise</h2>
           <Form.Group>
               <Form.Input
@@ -82,7 +88,7 @@ class aForm extends Component {
               />
               <Form.Input
                 label='The Promise'
-                width={11}
+                width={12}
                 placeholder='The Promise'
                 value={this.state.promiseStmnt}
                 onChange={event => this.setState({ promiseStmnt: event.target.value })}
