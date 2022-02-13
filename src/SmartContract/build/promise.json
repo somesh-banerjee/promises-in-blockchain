@@ -19,36 +19,22 @@
 	},
 	{
 		"inputs": [],
-		"name": "showPMakers",
-		"outputs": [
-			{
-				"internalType": "address[]",
-				"name": "",
-				"type": "address[]"
-			}
-		],
-		"stateMutability": "view",
-		"type": "function"
-	},
-	{
-		"inputs": [
-			{
-				"internalType": "address",
-				"name": "u",
-				"type": "address"
-			}
-		],
 		"name": "showPromises",
 		"outputs": [
 			{
-				"internalType": "string",
+				"internalType": "string[]",
 				"name": "",
-				"type": "string"
+				"type": "string[]"
 			},
 			{
 				"internalType": "string[]",
 				"name": "",
 				"type": "string[]"
+			},
+			{
+				"internalType": "uint256[]",
+				"name": "",
+				"type": "uint256[]"
 			}
 		],
 		"stateMutability": "view",

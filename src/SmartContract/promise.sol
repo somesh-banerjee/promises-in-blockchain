@@ -2,26 +2,21 @@
 pragma solidity ^0.8.2;
 
 contract Promise{
-    mapping(address => string) name;
-    mapping(address => string[]) mp;
-    address[] promiseMakers;
+    string[] name;
+    string[] mp;
+    uint256[] date;
 
     function makePromise(string memory n, string memory p)public{
-        if(bytes(name[msg.sender]).length==0){
-            name[msg.sender] = n;
-            promiseMakers.push(msg.sender);
-        }
-        mp[msg.sender].push(p);
+        name.push(n);
+        mp.push(p);
+        date.push(block.timestamp);
     }
 
-    function showPromises(address u) public view returns(string memory,string[] memory){
+    function showPromises() public view returns(string[] memory,string[] memory, uint256[] memory){
         return (
-            name[u],
-            mp[u]
+            name,
+            mp,
+            date
         );
-    }
-
-    function showPMakers() public view returns(address[] memory){
-        return promiseMakers;
     }
 }
