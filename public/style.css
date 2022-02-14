@@ -3,13 +3,13 @@ body {
     font-family: 'Roboto', sans-serif;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
+    min-height: 90vh;
 }
 
 .footer1 {
     color: #666;
     font-size: 12px;
-    display: block;
-    position: absolute;
+    position: relative;
     width: 90%;
     left: 50%;
     bottom: 0;
