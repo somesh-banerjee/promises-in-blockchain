@@ -15,6 +15,7 @@ class aForm extends Component {
     event.preventDefault();
 
     this.setState({ loading: true })
+    this.setState({ errorMessage: '' })
 
     if (typeof window.ethereum === undefined) {
       console.log('MetaMask is not installed!');
@@ -24,7 +25,7 @@ class aForm extends Component {
 
       const accounts = await window.ethereum.request({ method: 'eth_requestAccounts' });
       const account = accounts[0];
-      const chainID = process.env.REACT_APP_D_CHAIN_ID;
+      const chainID = '0x4' //process.env.REACT_APP_D_CHAIN_ID;
 
       if(window.ethereum.chainId !== chainID){
         try {
@@ -47,32 +48,34 @@ class aForm extends Component {
                 ],
               });
             } catch (addError) {
-              this.setState({ errorMessage: "Some unknown error. Report the issue"});
+              this.setState({ errorMessage: "Some unknown error 1. Report the issue"});
             }
           }else{
-            this.setState({ errorMessage: "Some unknown error. Report the issue"});
+            this.setState({ errorMessage: "Some unknown error 2. Report the issue"});
           }
           
         }
+      }else{
+        console.log(Contract);
+        try {
+          const transactionDetails = await Contract.methods
+            .makePromise(
+              this.state.name,
+              this.state.promiseStmnt
+            )
+            .send({
+              from: account,
+            });
+          console.log(transactionDetails);
+        } catch (e) {
+          this.setState({ errorMessage: e.message});
+        }
       }
-      console.log(Contract);
-      try {
-        const transactionDetails = await Contract.methods
-          .makePromise(
-            this.state.name,
-            this.state.promiseStmnt
-          )
-          .send({
-            from: account,
-          });
-        console.log(transactionDetails);
-      } catch (e) {
-        this.setState({ errorMessage: e.message});
-      }
-
     }
 
     this.setState({ loading: false })
+    this.setState({ name: ''})
+    this.setState({ promiseStmnt: ''})
   }
 
   render(){
