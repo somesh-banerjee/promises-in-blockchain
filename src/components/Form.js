@@ -65,6 +65,7 @@ class aForm extends Component {
           .send({
             from: account,
           });
+        console.log(transactionDetails);
       } catch (e) {
         this.setState({ errorMessage: e.message});
       }
