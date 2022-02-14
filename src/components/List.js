@@ -1,5 +1,5 @@
 import React,{ useState,useEffect } from 'react';
-import { Card } from 'semantic-ui-react';
+import { Card,Header } from 'semantic-ui-react';
 import Contract from '../SmartContract/promise';
 require('dotenv').config()
 
@@ -14,7 +14,7 @@ const List = () => {
     useEffect(()=>{
         const getProms = async() => {
             const allP = await Contract.methods.showPromises().call();
-            console.log(allP);
+            //console.log(allP);
     
             const arr=[];
             allP[2].forEach((element, index) => {
@@ -35,7 +35,7 @@ const List = () => {
 
     return(
         <div>
-            <h2>All Promises</h2>
+            <Header size='large' style={{marginTop:'30px'}}>All Promises</Header>
             <div>
                 <Card.Group>
                 {detail.name.map((items, index) => {
