@@ -3,6 +3,7 @@ import Layout from './components/Layout';
 import Form from './components/Form';
 import List from './components/List';
 import { Message } from 'semantic-ui-react';
+require('dotenv').config()
 
 const checkWeb3 = () => {
   if(typeof window !== 'undefined' && window.web3 !== undefined){

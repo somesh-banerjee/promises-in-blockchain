@@ -24,7 +24,7 @@ class aForm extends Component {
 
       const accounts = await window.ethereum.request({ method: 'eth_requestAccounts' });
       const account = accounts[0];
-      const chainID = process.env.D_CHAIN_ID;
+      const chainID = process.env.REACT_APP_D_CHAIN_ID;
 
       if(window.ethereum.chainId !== chainID){
         try {
