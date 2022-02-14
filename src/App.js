@@ -2,7 +2,7 @@ import React from 'react';
 import Layout from './components/Layout';
 import Form from './components/Form';
 import List from './components/List';
-import { Message } from 'semantic-ui-react';
+import NoWeb3 from './components/noWeb3';
 require('dotenv').config()
 
 const checkWeb3 = () => {
@@ -15,9 +15,7 @@ const checkWeb3 = () => {
     );
   }else{
     return (
-      <div>
-        <Message error header="Oops!" content="Looks like Metamask is not installed. Please install it to use the app."/>
-      </div>
+      <NoWeb3 />
     );
   }
 }
