@@ -1,6 +1,7 @@
 import React,{ useState } from 'react';
-import { Button } from 'semantic-ui-react';
+import { Card } from 'semantic-ui-react';
 import Contract from '../SmartContract/promise';
+require('dotenv').config()
 
 const List = () => {
 
@@ -33,13 +34,13 @@ const List = () => {
         <div>
             <h2>All Promises</h2>
             <div>
-                <ul>
+                <Card.Group>
                 {detail.name.map((items, index) => {
                     return (
-                        <li> {items} promised "{detail.prst[index]}" on {detail.time[index]}</li>
+                        <Card fluid header={items + ' Promised'} description={detail.prst[index]} meta={'on ' + detail.time[index]} />
                     );
                 })}
-                </ul>
+                </Card.Group>
             </div>
         </div>
     )

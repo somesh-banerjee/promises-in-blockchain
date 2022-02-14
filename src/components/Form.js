@@ -1,6 +1,7 @@
 import React,{ Component } from 'react';
 import { Button,Form,Message,Segment } from 'semantic-ui-react';
 import Contract from '../SmartContract/promise';
+require('dotenv').config()
 
 class aForm extends Component {
   state = {
@@ -15,7 +16,7 @@ class aForm extends Component {
 
     this.setState({ loading: true })
 
-    if (typeof window.ethereum === 'undefined') {
+    if (typeof window.ethereum === undefined) {
       console.log('MetaMask is not installed!');
       this.setState({ errorMessage: "Looks like Metamask Wallet is not installed, please install it."});
     }
@@ -23,7 +24,7 @@ class aForm extends Component {
 
       const accounts = await window.ethereum.request({ method: 'eth_requestAccounts' });
       const account = accounts[0];
-      const chainID = '0x539';
+      const chainID = process.env.D_CHAIN_ID;
 
       if(window.ethereum.chainId !== chainID){
         try {
