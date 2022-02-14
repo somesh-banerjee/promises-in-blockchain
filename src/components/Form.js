@@ -26,7 +26,7 @@ class aForm extends Component {
       const accounts = await window.ethereum.request({ method: 'eth_requestAccounts' });
       const account = accounts[0];
       const chainID = '0x4' //process.env.REACT_APP_D_CHAIN_ID;
-      var allOK = false
+      var allOK = true
 
       if(window.ethereum.chainId !== chainID){
         try {
@@ -52,9 +52,11 @@ class aForm extends Component {
               allOK = true;
             } catch (addError) {
               this.setState({ errorMessage: "Some unknown error 1. Report the issue"});
+              allOK = false
             }
           }else{
             this.setState({ errorMessage: "Some unknown error 2. Report the issue"});
+            allOK = false
           }
           
         }
