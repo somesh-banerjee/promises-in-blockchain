@@ -26,6 +26,7 @@ class aForm extends Component {
       const accounts = await window.ethereum.request({ method: 'eth_requestAccounts' });
       const account = accounts[0];
       const chainID = '0x4' //process.env.REACT_APP_D_CHAIN_ID;
+      var allOK = false
 
       if(window.ethereum.chainId !== chainID){
         try {
@@ -33,6 +34,7 @@ class aForm extends Component {
             method: 'wallet_switchEthereumChain',
             params: [{ chainId: chainID }],
           });
+          allOK = true;
         } catch (switchError) {
           // This error code indicates that the chain has not been added to MetaMask.
           if (switchError.code === 4902) {
@@ -47,6 +49,7 @@ class aForm extends Component {
                   },
                 ],
               });
+              allOK = true;
             } catch (addError) {
               this.setState({ errorMessage: "Some unknown error 1. Report the issue"});
             }
@@ -55,7 +58,8 @@ class aForm extends Component {
           }
           
         }
-      }else{
+      }
+      if(allOK === true){
         console.log(Contract);
         try {
           const transactionDetails = await Contract.methods
